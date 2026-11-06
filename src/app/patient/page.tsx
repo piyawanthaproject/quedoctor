@@ -298,6 +298,7 @@ function Ticket({ a, patient, deptName, onChange }: { a: MyAppointment; patient:
   const [msg, setMsg] = useState<string>('');
   const [worseOpen, setWorseOpen] = useState(false);
   const [flags, setFlags] = useState<string[]>([]);
+  const [confirmCancel, setConfirmCancel] = useState(false);
   const isToday = a.visit_date === bangkokDate();
   const canReportWorse = ['booked', 'skipped', 'checked_in', 'in_vitals', 'waiting_doctor'].includes(a.status);
 
@@ -308,6 +309,10 @@ function Ticket({ a, patient, deptName, onChange }: { a: MyAppointment; patient:
       onChange();
     } catch (e) { setMsg(errText(e)); }
   }, [a.id, onChange, t, errText]);
+
+  async function cancel() {
+    try { await rpc('cancel_appointment', { p_id: a.id }); setConfirmCancel(false); onChange(); } catch (e) { setMsg(errText(e)); }
+  }
 
   async function sendWorse() {
     try { await rpc('report_worse', { p_id: a.id, p_flags: flags }); setWorseOpen(false); onChange(); } catch (e) { setMsg(errText(e)); }
@@ -352,6 +357,20 @@ function Ticket({ a, patient, deptName, onChange }: { a: MyAppointment; patient:
         </Notice>
       )}
       {a.status === 'referred' && <Notice tone="crit" title={t('ticket_referred')}>{t('ticket_referred_body')}</Notice>}
+      {['booked', 'skipped'].includes(a.status) && (confirmCancel ? (
+        <div className="criteria stack" style={{ gap: 10 }}>
+          <b>{t('ticket_cancel_q')}</b>
+          <div className="actions">
+            <button className="btn btn-danger" onClick={cancel}>{t('ticket_cancel_yes')}</button>
+            <button className="btn" onClick={() => setConfirmCancel(false)}>{t('back')}</button>
+          </div>
+        </div>
+      ) : (
+        <div className="actions">
+          <button className="btn" onClick={() => setConfirmCancel(true)}>{t('ticket_cancel')}</button>
+          <span className="muted small">{t('ticket_cancel_hint')}</span>
+        </div>
+      ))}
       {msg && <div className="err">{msg}</div>}
 
       {canReportWorse && (a.worsened_at
