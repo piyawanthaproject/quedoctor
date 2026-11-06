@@ -1,8 +1,10 @@
 {
-  "name": "khiu-mor",
+  "name": "quedoctor",
   "version": "0.1.0",
   "private": true,
-  "description": "คิวหมอ — ระบบนัดหมายและคัดกรองผู้ป่วยนอก / Outpatient appointment and triage system",
+  "description": "QueDoctor — ระบบนัดหมายและคัดกรองผู้ป่วยนอก / Outpatient appointment and triage system",
+  "homepage": "https://quedoctor.vercel.app",
+  "license": "MIT",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

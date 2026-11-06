@@ -1,11 +1,43 @@
 # QueDoctor
 
-ระบบนัดหมายและคัดกรองผู้ป่วยนอก ที่ให้พยาบาลเป็นผู้ตัดสินแผนกและระดับความเร่งด่วน
+**ระบบนัดหมายและคัดกรองผู้ป่วยนอก ที่ให้พยาบาลเป็นผู้ตัดสินแผนกและระดับความเร่งด่วน**
 Outpatient appointment and triage system where nurses decide the department and urgency level.
 
-[ภาษาไทย](#ภาษาไทย) · [English](#english)
+**🔗 เว็บจริง / Live demo: [quedoctor.vercel.app](https://quedoctor.vercel.app)**
 
-![Nurse triage](docs/screenshots/nurse-triage.png)
+![CI](https://github.com/piyawanthaproject/quedoctor/actions/workflows/ci.yml/badge.svg)
+![Next.js](https://img.shields.io/badge/Next.js-14-000000?logo=nextdotjs)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?logo=supabase&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-0b5d49)
+
+[ภาษาไทย](#ภาษาไทย) · [English](#english) · [ภาพหน้าจอ / Screenshots](#ภาพหน้าจอ--screenshots)
+
+![Nurse triage screen](docs/screenshots/nurse-triage.png)
+
+---
+
+## ลองเล่นเดโม / Try the demo
+
+เปิด [quedoctor.vercel.app](https://quedoctor.vercel.app) แล้วกดเลือกบัญชีทดลองทางขวาของหน้าเข้าสู่ระบบ
+Open the live site and pick a demo account on the sign-in page.
+
+| บทบาท / Role | อีเมล / Email | รหัสผ่าน / Password |
+|---|---|---|
+| ผู้ป่วย / Patient | `patient@khiumor.demo` | `KhiuMor-demo-2026` |
+| พยาบาล / Nurse | `nurse@khiumor.demo` | `KhiuMor-demo-2026` |
+| แพทย์ / Physician | `doctor@khiumor.demo` | `KhiuMor-demo-2026` |
+| ผู้บริหาร / Administrator | `admin@khiumor.demo` | `KhiuMor-demo-2026` |
+
+**ลำดับที่แนะนำ / Suggested walkthrough**
+1. **ผู้ป่วย** แจ้งอาการบนภาพร่างกาย → เลือกเวลา → เช็กอิน
+2. **พยาบาล** คัดกรอง กำหนดแผนกและระดับ → เรียกคิว → กรอกค่าร่างกาย
+3. **แพทย์** เรียกตรวจ → เขียนการวินิจฉัยและค่ารักษา
+4. **ผู้บริหาร** ดูแดชบอร์ด
+5. กลับไปเป็นผู้ป่วย กด **เริ่มเล่นเดโมใหม่** เพื่อเล่นซ้ำได้ทุกเมื่อ
+
+เปิดสองหน้าต่าง (หนึ่งในนั้นเป็น Private/Incognito) เป็นผู้ป่วยกับพยาบาลพร้อมกัน จะเห็นคิวอัปเดตแบบเรียลไทม์
+Use two windows (one private) as patient and nurse to watch the queue update in real time.
 
 ---
 
@@ -17,43 +49,23 @@ Outpatient appointment and triage system where nurses decide the department and 
 - ผู้ป่วยที่อาการหนักจริงแต่บอกว่า "ไม่เป็นไรมาก" อาจรอคิวปกติ ส่วนคนที่กังวลมากอาจได้คิวด่วนทั้งที่อาการไม่หนัก
 - ข้อมูลอาการ ค่าร่างกาย และการวินิจฉัยอยู่บนกระดาษ ผู้บริหารไม่มีข้อมูลวางแผน
 
-### ระบบทำงานอย่างไร
-1. **ผู้ป่วย** กรอกประวัติครั้งเดียว ตอบคำถามสัญญาณอันตราย 7 ข้อ กดตำแหน่งบนภาพร่างกาย (ชาย/หญิง หน้า/หลัง) แล้ว **เขียนอาการเอง** พร้อมความรุนแรง 0–10 จากนั้นเลือกเวลานัด **ไม่ต้องเลือกแผนก**
-2. ถ้าเลือกสัญญาณอันตราย ระบบไม่ให้จองนัด แนะนำให้ไปห้องฉุกเฉินหรือโทร 1669 และแจ้งพยาบาลให้โทรกลับ
-3. **พยาบาล** เห็นอาการทั้งหมดและ "ผลตามเกณฑ์คัดกรอง" พร้อมเหตุผลทุกข้อ แล้ว **กำหนดแผนกและระดับ 1–5 เอง** ถ้าต่างจากผลตามเกณฑ์ต้องเขียนเหตุผล
-4. ผู้ป่วยต้อง **เช็กอินก่อนนัด 30 นาที** ถ้าไม่ทัน ระบบเลื่อนคิวอัตโนมัติ คนถัดไปขยับขึ้น และเมื่อผู้ป่วยมาถึงจะได้ช่วงเวลาว่างถัดไป
-5. จุดตรวจร่างกายเรียกคิวตามระดับความเร่งด่วนก่อน แล้วตามเวลานัด ถ้าค่าร่างกายเข้าเกณฑ์ระดับที่สูงกว่าเดิม ต้องประเมินซ้ำก่อนส่งพบแพทย์
-6. ระหว่างรอ ผู้ป่วยกด "อาการแย่ลง" ได้ พยาบาลได้รับแจ้งเตือนทันที
-7. **แพทย์** เห็นข้อมูลทุกอย่างหน้าเดียว **เขียนการวินิจฉัยเอง** (ใส่รหัส ICD-10 ได้) บันทึกการรักษาและค่ารักษา
-8. **ผู้บริหาร** เห็นแดชบอร์ดแบบไม่ระบุตัวบุคคล: ผู้ป่วยแยกแผนก ช่วงอายุ ช่วงเวลาที่หนาแน่น โรคที่พบบ่อย รายได้แยกแผนกและสิทธิ์การรักษา และอัตราที่พยาบาลปรับระดับจากผลตามเกณฑ์
+### ฟีเจอร์
+| ผู้ใช้ | ทำอะไรได้ |
+|---|---|
+| ผู้ป่วย | กรอกประวัติครั้งเดียว · ตอบคำถามสัญญาณอันตราย 7 ข้อ · กดตำแหน่งบนภาพร่างกาย (ชาย/หญิง หน้า/หลัง) แล้วเขียนอาการเอง พร้อมความรุนแรง 0–10 · เลือกเวลานัดโดยไม่ต้องเลือกแผนก · ใบนัดพร้อม QR · เช็กอินและดูคิว · แจ้งอาการแย่ลงระหว่างรอ · ยกเลิกหรือเปลี่ยนเวลาก่อนเช็กอิน |
+| พยาบาล | เห็น "ผลตามเกณฑ์คัดกรอง" พร้อมเหตุผลทุกข้อ · กำหนดแผนกและระดับ 1–5 เอง (ต่างจากเกณฑ์ต้องเขียนเหตุผล) · เช็กอินแทนผู้ป่วยที่ไม่มีมือถือ · เรียกคิวตามระดับความเร่งด่วน · กรอกค่าร่างกาย ถ้าเข้าเกณฑ์ระดับสูงขึ้นต้องประเมินซ้ำ · รับแจ้งเตือนเมื่อผู้ป่วยแจ้งอาการฉุกเฉินหรืออาการแย่ลง |
+| แพทย์ | เห็นข้อมูลทุกอย่างหน้าเดียว · ค่าร่างกายเทียบครั้งก่อน · ประวัติการคัดกรอง · เขียนการวินิจฉัย (ใส่รหัส ICD-10 ได้) · ค่ารักษาคำนวณส่วนเบิกตามสิทธิ์ |
+| ผู้บริหาร | แดชบอร์ดไม่ระบุตัวบุคคล: ผู้ป่วยแยกแผนก ช่วงอายุ ช่วงเวลาหนาแน่น โรคที่พบบ่อย รายได้แยกแผนกและสิทธิ์การรักษา อัตราที่พยาบาลปรับระดับจากเกณฑ์ |
+
+**กติกาเช็กอิน:** ต้องเช็กอินก่อนนัด 30 นาที ถ้าไม่ทัน ระบบเลื่อนคิวอัตโนมัติ คนถัดไปขยับขึ้น และเมื่อผู้ป่วยมาถึงจะได้ช่วงเวลาว่างถัดไป
+
+**ระบบสองภาษา:** สลับไทย/อังกฤษได้ทุกหน้า
 
 ### ความปลอดภัยของข้อมูล
-- ทุกการเขียนข้อมูลผ่านฟังก์ชันในฐานข้อมูลที่ตรวจบทบาทผู้เรียก (`SECURITY DEFINER` + `require_role`)
-- Row Level Security: ผู้ป่วยอ่านตาราง `appointments` ไม่ได้เลย เห็นนัดของตัวเองผ่าน `get_my_appointments()` ซึ่งไม่มีระดับความเร่งด่วนและไม่มีข้อมูลคนอื่น
+- ทุกการเขียนข้อมูลผ่านฟังก์ชันในฐานข้อมูลที่ตรวจบทบาทผู้เรียก
+- Row Level Security: ผู้ป่วยอ่านตารางนัดหมายไม่ได้เลย เห็นนัดของตัวเองผ่าน `get_my_appointments()` ซึ่งไม่มีระดับความเร่งด่วนและไม่มีข้อมูลคนอื่น
 - แพทย์เห็นเฉพาะผู้ป่วยที่ส่งมาพบ ผู้บริหารเห็นเฉพาะตัวเลขรวมผ่าน `admin_stats()`
 - ทุกการกระทำบันทึกใน `audit_logs` พร้อมผู้ทำและเวลา
-
-### เทคโนโลยี
-Next.js 14 (App Router) · TypeScript · Supabase (PostgreSQL, Auth, Realtime, RLS) · Recharts · Vitest · ฟอนต์ Noto Sans Thai Looped · สลับภาษาไทย/อังกฤษได้ทุกหน้า
-
-### ติดตั้งและรัน
-1. ติดตั้ง Node.js 18 ขึ้นไป แล้วรัน `npm install`
-2. สร้างโปรเจกต์ที่ [supabase.com](https://supabase.com) (ฟรี)
-3. เปิด **SQL Editor** ใน Supabase วางไฟล์ `supabase/migrations/20261106000000_init.sql` ทั้งไฟล์ แล้วกด Run
-4. คัดลอก `.env.example` เป็น `.env.local` แล้วใส่ค่า URL, anon key และ service role key จาก **Project Settings → API**
-5. ใส่ข้อมูลตัวอย่าง: `npm run seed` (สร้างบัญชีทดลอง 4 บทบาท ผู้ป่วยตัวอย่าง คิววันนี้ และข้อมูลย้อนหลัง 90 วัน)
-6. รัน `npm run dev` แล้วเปิด http://localhost:3000
-7. ทดสอบเกณฑ์คัดกรอง: `npm test`
-
-บัญชีทดลอง (รหัสผ่าน `KhiuMor-demo-2026`): `patient@khiumor.demo` · `nurse@khiumor.demo` · `doctor@khiumor.demo` · `admin@khiumor.demo`
-
-> ถ้าต้องการให้ผู้ป่วยสมัครเองได้ทันทีโดยไม่ต้องยืนยันอีเมล ให้ปิด **Confirm email** ใน Authentication → Providers → Email
-> สคริปต์ seed ตั้งเวลาเปิดคลินิกเป็น 07:00–21:00 เพื่อให้ทดลองได้ทั้งวัน แก้ได้ในตาราง `clinic_settings`
-
-### ข้อควรทราบ
-- **เกณฑ์คัดกรองใน `src/lib/triage.ts` เป็นตัวอย่าง** ใช้ประกอบการตัดสินใจของพยาบาลเท่านั้น ก่อนใช้งานจริงต้องให้ทีมพยาบาลและแพทย์กำหนดเกณฑ์ตามแนวทางที่โรงพยาบาลใช้
-- อัตราเบิกของแต่ละสิทธิ์ในตาราง `coverage_rates` เป็นค่าสมมติ
-- ระดับตามเกณฑ์คำนวณฝั่งหน้าเว็บแล้วส่งให้ฐานข้อมูล งานถัดไปคือย้ายการคำนวณไปไว้ในฐานข้อมูลด้วย เพื่อไม่ต้องเชื่อค่าจากหน้าเว็บ
 
 ---
 
@@ -65,45 +77,106 @@ Next.js 14 (App Router) · TypeScript · Supabase (PostgreSQL, Auth, Realtime, R
 - A seriously ill patient who says "it's nothing" can wait in the regular queue, while a worried patient with mild symptoms can be rushed.
 - Symptoms, vital signs and diagnoses live on paper, so managers have nothing to plan with.
 
-### How it works
-1. **Patients** fill in their record once, answer 7 emergency-sign questions, tap areas on a body diagram (female/male, front/back), **write their own symptoms** with a 0–10 severity, and pick a time. **They never choose a department.**
-2. Any emergency sign blocks booking, tells the patient to go to the ED or call 1669, and alerts a nurse to call back.
-3. **Nurses** see all symptoms plus a transparent **triage criteria result** with every reason listed, then **set the department and a level from 1 to 5 themselves**. A level that differs from the criteria needs a written reason.
-4. Patients must **check in 30 minutes before** their time. Late patients are moved automatically, the queue moves up, and on arrival they get the next free slot.
-5. The examination station calls patients by urgency level, then by time. If vital signs meet a higher level, the nurse must reassess before the physician sees them.
-6. While waiting, patients can report that they feel worse; nurses are alerted immediately.
-7. **Physicians** see everything on one page, **write the diagnosis as free text** (optional ICD-10 code), and record treatment and charges.
-8. **Administrators** see an anonymised dashboard: patients by department, age and sex, busiest times, common diagnoses, revenue by department and coverage, and how often nurses override the criteria.
+### Features
+- **Patients** fill in their record once, answer 7 emergency-sign questions, tap areas on a body diagram and **write their own symptoms** with a 0–10 severity, then pick a time. **They never choose a department.** They get a QR slip, check in, follow the queue, can report feeling worse, and can cancel before check-in.
+- **Nurses** see a transparent **triage criteria result** with every reason listed, then **set the department and a level from 1 to 5 themselves**. A level that differs from the criteria needs a written reason. Vital signs that meet a higher level force a reassessment before the physician.
+- **Physicians** see everything on one page and **write the diagnosis as free text** (optional ICD-10), with treatment and charges split by coverage.
+- **Administrators** see an anonymised dashboard: departments, age and sex, busiest times, common diagnoses, revenue by department and coverage, and how often nurses override the criteria.
+- Patients must **check in 30 minutes early**; late patients are moved to the next free slot automatically.
+- Thai / English on every page.
 
 ### Data protection
-- All writes go through database functions that check the caller's role.
-- Row level security: patients cannot read `appointments`; they see their own through `get_my_appointments()`, which hides urgency levels and other people.
-- Physicians see only patients sent to them; administrators only aggregates via `admin_stats()`.
-- Every action is written to `audit_logs` with actor and time.
+All writes go through role-checked database functions. Row level security keeps patients out of the appointments table, limits physicians to patients sent to them, and gives administrators aggregates only. Every action is written to an audit log.
 
-### Stack
-Next.js 14 (App Router) · TypeScript · Supabase (PostgreSQL, Auth, Realtime, RLS) · Recharts · Vitest · Thai/English on every page
+---
 
-### Setup
-1. Node.js 18+, then `npm install`
-2. Create a free project at [supabase.com](https://supabase.com)
-3. In the Supabase **SQL Editor**, paste and run `supabase/migrations/20261106000000_init.sql`
-4. Copy `.env.example` to `.env.local` and fill in the URL, anon key and service role key (Project Settings → API)
-5. `npm run seed` for demo accounts, patients, today's queue and 90 days of history
-6. `npm run dev` and open http://localhost:3000
-7. `npm test` runs the triage criteria tests
+## สถาปัตยกรรม / Architecture
 
-Demo accounts (password `KhiuMor-demo-2026`): `patient@khiumor.demo` · `nurse@khiumor.demo` · `doctor@khiumor.demo` · `admin@khiumor.demo`
+```mermaid
+flowchart LR
+  subgraph Browser
+    P[Patient] --- N[Nurse] --- D[Physician] --- A[Admin]
+  end
+  Browser -->|Next.js pages + middleware| V[Vercel]
+  V -->|supabase-js| API[Supabase API]
+  API --> RLS{Row Level Security}
+  RLS --> DB[(PostgreSQL)]
+  API -->|RPC| F[SQL functions<br/>book · check_in · save_triage<br/>save_vitals · finish_visit · admin_stats]
+  F --> DB
+  DB -->|Realtime| N
+  DB -->|Realtime| D
+```
 
-### Notes
-- **The criteria in `src/lib/triage.ts` are examples** that support, never replace, the nurse's judgement. Real thresholds must come from the hospital's clinical team.
-- Claim ratios in `coverage_rates` are placeholders.
-- The criteria level is computed in the browser and passed to the database; moving that calculation into the database is the next step.
+### เส้นทางผู้ป่วย / Patient flow
 
-### Screenshots
+```mermaid
+flowchart TD
+  B[จองนัด + แจ้งอาการ<br/>Book + report symptoms] --> RF{สัญญาณอันตราย?<br/>Emergency sign?}
+  RF -- ใช่ / yes --> ER[ห้องฉุกเฉิน / 1669<br/>พยาบาลโทรกลับ]
+  RF -- ไม่ / no --> T[พยาบาลคัดกรอง<br/>Nurse sets department + level]
+  T --> C{เช็กอินก่อน 30 นาที?<br/>Checked in on time?}
+  C -- ไม่ทัน / late --> S[เลื่อนไปช่วงว่างถัดไป<br/>Moved to next free slot] --> V2
+  C -- ทัน / yes --> V2[ตรวจร่างกายเบื้องต้น<br/>Vital signs]
+  V2 --> R{ค่าเข้าเกณฑ์ระดับสูงขึ้น?<br/>Higher level?}
+  R -- ใช่ / yes --> T2[ประเมินซ้ำ<br/>Reassess] --> DR
+  R -- ไม่ / no --> DR[พบแพทย์<br/>Physician]
+  DR --> DONE[บันทึกผลและค่ารักษา<br/>Diagnosis + charges] --> DASH[แดชบอร์ด<br/>Dashboard]
+```
+
+---
+
+## เทคโนโลยี / Tech stack
+| ส่วน / Layer | เครื่องมือ / Tool |
+|---|---|
+| Frontend | Next.js 14 (App Router), React 18, TypeScript |
+| Database / Auth / Realtime | Supabase (PostgreSQL, Row Level Security, Realtime) |
+| Charts | Recharts |
+| Tests / CI | Vitest, GitHub Actions |
+| Hosting | Vercel |
+
+## โครงสร้างโปรเจกต์ / Project structure
+```
+src/
+  app/            หน้าเว็บแต่ละบทบาท / pages per role (login, patient, nurse, doctor, admin)
+  components/     ส่วนประกอบหน้าจอ / UI pieces, body diagram, triage card
+  lib/triage.ts   เกณฑ์คัดกรอง / triage criteria (+ triage.test.ts)
+  lib/dict.ts     ข้อความไทย/อังกฤษ / Thai and English text
+  middleware.ts   ส่งผู้ใช้ไปหน้าตามบทบาท / role routing
+supabase/migrations/   ตาราง ฟังก์ชัน และสิทธิ์ / schema, functions, row level security
+scripts/seed.mjs       ข้อมูลตัวอย่าง / demo data
+```
+
+## ติดตั้งในเครื่อง / Run locally
+1. Node.js 18 ขึ้นไป แล้ว `npm install`
+2. สร้างโปรเจกต์ฟรีที่ [supabase.com](https://supabase.com)
+3. ใน Supabase **SQL Editor** รันไฟล์ใน `supabase/migrations/` **ตามลำดับชื่อไฟล์**:
+   `20261106000000_init.sql` → `20261106010000_cancel.sql` → `20261106020000_demo_reset.sql`
+4. คัดลอก `.env.example` เป็น `.env.local` แล้วใส่ URL, anon key และ service role key (Project Settings → API)
+5. `npm run seed` ใส่บัญชีทดลอง คิววันนี้ และข้อมูลย้อนหลัง 90 วัน
+6. `npm run dev` แล้วเปิด http://localhost:3000
+7. `npm test` รันเทสต์เกณฑ์คัดกรอง
+
+> Deploy บน Vercel ใส่แค่ `NEXT_PUBLIC_SUPABASE_URL` และ `NEXT_PUBLIC_SUPABASE_ANON_KEY` ห้ามใส่ service role key
+> On Vercel set only the URL and anon key. Never expose the service role key.
+
+## ข้อควรทราบ / Notes
+- **เกณฑ์คัดกรองใน `src/lib/triage.ts` เป็นตัวอย่าง** ใช้ประกอบการตัดสินใจของพยาบาลเท่านั้น ก่อนใช้งานจริงต้องให้ทีมพยาบาลและแพทย์กำหนดเกณฑ์ตามแนวทางที่โรงพยาบาลใช้
+  The criteria are examples that support, never replace, the nurse's judgement.
+- อัตราเบิกตามสิทธิ์ใน `coverage_rates` เป็นค่าสมมติ / Claim ratios are placeholders.
+- ข้อมูลทั้งหมดในเดโมเป็นข้อมูลสมมติ / All demo data is fictional.
+
+## แผนพัฒนาต่อ / Roadmap
+- [ ] คำนวณผลตามเกณฑ์ในฐานข้อมูลด้วย ไม่ต้องเชื่อค่าจากหน้าเว็บ / Compute the criteria level in the database too
+- [ ] แจ้งเตือนผ่าน LINE หรือ SMS ก่อนนัด / LINE or SMS reminders
+- [ ] จอเรียกคิวหน้าห้องพร้อมเสียงภาษาไทย / Waiting-room display with Thai voice calls
+- [ ] ญาติหรือ อสม. จองแทนผู้สูงอายุ / Relatives and village health volunteers booking for older patients
+- [ ] พิมพ์บัตรคิวที่เคาน์เตอร์ / Printed queue slips at the counter
+
+## ภาพหน้าจอ / Screenshots
 | | |
 |---|---|
-| ![Symptoms](docs/screenshots/patient-symptoms.png) | ![Slip](docs/screenshots/patient-slip.png) |
-| ![Doctor](docs/screenshots/doctor-exam.png) | ![Dashboard](docs/screenshots/admin-dashboard.png) |
+| ![แจ้งอาการ / Symptoms](docs/screenshots/patient-symptoms.png) | ![ใบนัด / Slip](docs/screenshots/patient-slip.png) |
+| ![แพทย์ / Physician](docs/screenshots/doctor-exam.png) | ![แดชบอร์ด / Dashboard](docs/screenshots/admin-dashboard.png) |
 
-Screenshots use demo data.
+## License
+[MIT](LICENSE)
