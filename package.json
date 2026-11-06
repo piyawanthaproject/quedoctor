@@ -1,0 +1,32 @@
+{
+  "name": "khiu-mor",
+  "version": "0.1.0",
+  "private": true,
+  "description": "คิวหมอ — ระบบนัดหมายและคัดกรองผู้ป่วยนอก / Outpatient appointment and triage system",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "vitest run",
+    "seed": "node scripts/seed.mjs"
+  },
+  "dependencies": {
+    "@supabase/ssr": "0.5.1",
+    "@supabase/supabase-js": "2.45.4",
+    "next": "14.2.15",
+    "qrcode.react": "4.0.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "recharts": "2.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "20.16.11",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
+    "eslint": "8.57.1",
+    "eslint-config-next": "14.2.15",
+    "typescript": "5.6.3",
+    "vitest": "2.1.3"
+  }
+}
