@@ -131,6 +131,10 @@ const th = {
   ticket_done: 'การตรวจเสร็จสิ้น ขอบคุณที่ใช้บริการ',
   ticket_new: 'นัดใหม่',
   p_past: 'นัดที่ผ่านมา',
+  demo_title: 'โหมดเดโม',
+  demo_body: 'บัญชีทดลอง กดเพื่อล้างนัดที่ค้างอยู่ แล้วเริ่มแจ้งอาการและจองใหม่ได้ทุกเมื่อ',
+  demo_reset: 'เริ่มเล่นเดโมใหม่',
+  demo_done: 'ล้างนัดแล้ว เริ่มใหม่ได้เลย',
   ticket_cancel: 'ยกเลิกนัด / เปลี่ยนเวลา',
   ticket_cancel_q: 'ยกเลิกนัดนี้แล้วกลับไปจองใหม่ใช่ไหม?',
   ticket_cancel_yes: 'ยืนยันยกเลิกนัด',
@@ -299,6 +303,7 @@ const th = {
   log_start_exam: 'เริ่มตรวจ',
   log_finish_visit: 'ตรวจเสร็จ',
   log_cancel: 'ผู้ป่วยยกเลิกนัด',
+  log_demo_reset: 'บัญชีทดลองเริ่มเดโมใหม่',
   log_system: 'ระบบ',
 
   // doctor
@@ -485,6 +490,10 @@ const en: Record<DictKey, string> = {
   ticket_done: 'Your visit is complete. Thank you.',
   ticket_new: 'New appointment',
   p_past: 'Past appointments',
+  demo_title: 'Demo mode',
+  demo_body: 'Demo account: clear the open appointment at any stage and report symptoms and book again',
+  demo_reset: 'Restart demo',
+  demo_done: 'Cleared. Start again.',
   ticket_cancel: 'Cancel / change time',
   ticket_cancel_q: 'Cancel this appointment and book again?',
   ticket_cancel_yes: 'Yes, cancel it',
@@ -646,6 +655,7 @@ const en: Record<DictKey, string> = {
   log_start_exam: 'Examination started',
   log_finish_visit: 'Visit completed',
   log_cancel: 'Patient cancelled',
+  log_demo_reset: 'Demo account restarted',
   log_system: 'System',
 
   d_queue: 'Waiting patients',

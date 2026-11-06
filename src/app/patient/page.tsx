@@ -25,10 +25,13 @@ export default function PatientPage() {
   const [appts, setAppts] = useState<MyAppointment[]>([]);
   const [depts, setDepts] = useState<Department[]>([]);
   const [checkinBefore, setCheckinBefore] = useState(30);
+  const [isDemo, setIsDemo] = useState(false);
+  const [demoMsg, setDemoMsg] = useState('');
 
   const load = useCallback(async () => {
     const { data: { user } } = await sb().auth.getUser();
     if (!user) return;
+    setIsDemo(!!user.email?.endsWith('@khiumor.demo'));
     const [{ data: p }, { data: d }, { data: s }] = await Promise.all([
       sb().from('patients').select('*').eq('user_id', user.id).maybeSingle(),
       sb().from('departments').select('id, name_th, name_en'),
@@ -57,6 +60,18 @@ export default function PatientPage() {
       <div className="cols">
         <div className="stack">{body}</div>
         <div className="stack">
+          {isDemo && patient && (
+            <Notice tone="info" title={t('demo_title')}>
+              <p style={{ margin: '0 0 8px' }}>{t('demo_body')}</p>
+              <div className="actions">
+                <button className="btn btn-primary" onClick={async () => {
+                  try { await rpc('demo_reset_my_appointments'); setDemoMsg(t('demo_done')); setEditing(false); await load(); }
+                  catch (e) { setDemoMsg(String((e as Error).message)); }
+                }}>{t('demo_reset')}</button>
+                {demoMsg && <span className="small">{demoMsg}</span>}
+              </div>
+            </Notice>
+          )}
           <Section title={t('guide_title')}>
             <ol style={{ margin: 0, paddingLeft: 20, display: 'flex', flexDirection: 'column', gap: 6 }}>
               <li>{t('guide_1', { n: checkinBefore })}</li><li>{t('guide_2')}</li><li>{t('guide_3')}</li><li>{t('guide_4')}</li><li>{t('guide_5')}</li>
