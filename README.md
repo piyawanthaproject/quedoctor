@@ -1,4 +1,4 @@
-# คิวหมอ · Khiu Mor
+# QueDoctor
 
 ระบบนัดหมายและคัดกรองผู้ป่วยนอก ที่ให้พยาบาลเป็นผู้ตัดสินแผนกและระดับความเร่งด่วน
 Outpatient appointment and triage system where nurses decide the department and urgency level.

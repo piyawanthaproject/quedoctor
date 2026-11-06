@@ -30,7 +30,7 @@ function useTokens() {
   const read = () => {
     if (typeof window === 'undefined') return {} as Record<string, string>;
     const s = getComputedStyle(document.documentElement);
-    return Object.fromEntries(['--c1', '--c2', '--c3', '--c4', '--c5', '--lv1', '--lv2', '--lv3', '--lv4', '--lv5', '--rule', '--muted', '--ink', '--surface', '--navy']
+    return Object.fromEntries(['--c1', '--c2', '--c3', '--c4', '--c5', '--lv1', '--lv2', '--lv3', '--lv4', '--lv5', '--rule', '--muted', '--ink', '--surface', '--brand']
       .map((k) => [k.slice(2), s.getPropertyValue(k).trim()]));
   };
   const [tok, setTok] = useState<Record<string, string>>({});
@@ -154,7 +154,7 @@ export default function AdminPage() {
                       <div className="d">{t(`dow_${d}` as DictKey)}</div>
                       {hours.map((h) => {
                         const v = (s.heatmap.find((x) => x.dow === d && x.hour === h)?.n ?? 0) / weeks, a = v / heatMax;
-                        return <div key={h} className="c" title={`${v.toFixed(1)}`} style={{ background: `color-mix(in srgb, var(--navy) ${Math.round(a * 85 + 4)}%, var(--sunken))`, color: a > 0.5 ? '#fff' : 'var(--muted)' }}>{v >= 1 ? Math.round(v) : ''}</div>;
+                        return <div key={h} className="c" title={`${v.toFixed(1)}`} style={{ background: `color-mix(in srgb, var(--brand) ${Math.round(a * 85 + 4)}%, var(--sunken))`, color: a > 0.5 ? '#fff' : 'var(--muted)' }}>{v >= 1 ? Math.round(v) : ''}</div>;
                       })}
                     </div>
                   ))}

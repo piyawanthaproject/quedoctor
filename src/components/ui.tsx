@@ -18,7 +18,9 @@ export function AppShell({ role, name, children }: { role: Role | null; name?: s
       <header className="topbar">
         <div className="wrap topbar-row">
           <div className="brand">
-            <span className="brand-mark" aria-hidden="true">คม</span>
+            <span className="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M9 3h6v6h6v6h-6v6H9v-6H3V9h6z" fill="currentColor" /></svg>
+            </span>
             <div><div className="brand-name">{t('app_name')}</div><div className="brand-sub">{t('app_tagline')}</div></div>
           </div>
           <div className="topbar-right">
@@ -34,6 +36,14 @@ export function AppShell({ role, name, children }: { role: Role | null; name?: s
           </div>
         </div>
       </header>
+      {role && (
+        <div className="subbar">
+          <div className="wrap subbar-row">
+            <span className="subbar-role">{t(`role_${role}` as DictKey)}</span>
+            <span>{new Date().toLocaleDateString(lang === 'th' ? 'th-TH' : 'en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Asia/Bangkok' })}</span>
+          </div>
+        </div>
+      )}
       <main className="wrap page">{children}</main>
     </>
   );

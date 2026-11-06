@@ -1,7 +1,7 @@
 // UI text in Thai and English. Every key must exist in both (TypeScript checks this).
 
 const th = {
-  app_name: 'คิวหมอ',
+  app_name: 'QueDoctor',
   app_tagline: 'ระบบนัดหมายและคัดกรองผู้ป่วยนอก',
   lang_switch: 'English',
   sign_out: 'ออกจากระบบ',
@@ -354,7 +354,7 @@ const th = {
 export type DictKey = keyof typeof th;
 
 const en: Record<DictKey, string> = {
-  app_name: 'Khiu Mor',
+  app_name: 'QueDoctor',
   app_tagline: 'Outpatient appointments and triage',
   lang_switch: 'ภาษาไทย',
   sign_out: 'Sign out',

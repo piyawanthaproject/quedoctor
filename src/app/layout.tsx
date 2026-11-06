@@ -4,7 +4,7 @@ import { I18nProvider } from '@/lib/i18n';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'คิวหมอ · Khiu Mor',
+  title: 'QueDoctor',
   description: 'ระบบนัดหมายและคัดกรองผู้ป่วยนอก · Outpatient appointments and triage',
 };
 
