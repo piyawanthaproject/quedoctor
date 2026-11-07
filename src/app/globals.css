@@ -100,8 +100,8 @@ button, input, textarea, select { font: inherit; color: inherit; }
 
 /* choice, toggles, scale */
 .choice { display: inline-flex; flex-wrap: wrap; border: 1px solid var(--rule-strong); border-radius: 3px; overflow: hidden; }
-.choice-wide { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 1px; background: var(--rule); }
-.choice-wide .choice-btn { border-right: 0; }
+.choice-wide { display: flex; flex-wrap: wrap; }
+.choice-wide .choice-btn { flex: 1 1 120px; border-right: 0; box-shadow: inset 0 0 0 .5px var(--rule); }
 .choice-btn { border: 0; border-right: 1px solid var(--rule); background: var(--surface); padding: 7px 14px; cursor: pointer; flex: 1 1 auto; }
 .choice-btn:last-child { border-right: 0; }
 .choice-btn[aria-checked="true"] { background: var(--brand); color: var(--brand-ink); font-weight: 600; }
