@@ -2,19 +2,8 @@
   <img src="docs/banner.png" alt="QueDoctor — ระบบนัดหมายและคัดกรองผู้ป่วยนอก" width="100%">
 </p>
 
-<p align="center">
-  <a href="https://quedoctor.vercel.app"><b>▶ ลองเล่นเดโม</b></a> ·
-  <a href="#ลองเล่นใน-2-นาที">บัญชีทดลอง</a> ·
-  <a href="README.en.md">English</a>
-</p>
 
-<p align="center">
-  <a href="https://github.com/piyawanthaproject/quedoctor/actions/workflows/ci.yml"><img src="https://github.com/piyawanthaproject/quedoctor/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
-  <img src="https://img.shields.io/badge/Next.js-14-000000?logo=nextdotjs" alt="Next.js 14">
-  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?logo=supabase&logoColor=white" alt="Supabase">
-  <img src="https://img.shields.io/badge/license-MIT-0b5d49" alt="MIT">
-</p>
+
 
 **QueDoctor** เปลี่ยนการรอคิวโรงพยาบาลแบบ "ใครมาก่อนได้ก่อน" เป็น **การนัดตามช่วงเวลา** ผู้ป่วยแจ้งอาการล่วงหน้าผ่านภาพร่างกาย พยาบาลเป็นผู้กำหนดแผนกและระดับความเร่งด่วน โดยมีเกณฑ์คัดกรองที่ตรวจสอบได้เป็นตัวช่วย ผู้ป่วยมาก่อนนัดแค่ 30 นาที ไม่ต้องรอตั้งแต่เช้ามืด
 
@@ -31,7 +20,7 @@
 
 ---
 
-## ลองเล่นใน 2 นาที
+## ทดลองเดโม่
 
 เปิด **[quedoctor.vercel.app](https://quedoctor.vercel.app)** แล้วกดเลือกบัญชีทดลองทางขวาของหน้าเข้าสู่ระบบ รหัสผ่านทุกบัญชีคือ `KhiuMor-demo-2026`
 
@@ -211,4 +200,5 @@ scripts/seed.mjs        ข้อมูลตัวอย่าง
 
 ## ผู้พัฒนา
 
-พัฒนาโดย [@piyawanthaproject](https://github.com/piyawanthaproject) · สัญญาอนุญาต [MIT](LICENSE)
+พัฒนาโดย Piyawan Thanakularporn
+[@piyawanthaproject](https://github.com/piyawanthaproject) ·
